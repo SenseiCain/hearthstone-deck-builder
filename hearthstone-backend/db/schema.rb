@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_08_174854) do
+ActiveRecord::Schema.define(version: 2020_04_08_181542) do
 
   create_table "cards", force: :cascade do |t|
     t.string "card_id"
     t.string "dbf_id"
     t.string "name"
     t.string "card_set"
-    t.string "type"
+    t.string "card_type"
     t.string "rarity"
     t.string "cost"
     t.string "player_class"
