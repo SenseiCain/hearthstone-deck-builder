@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  card_id: MyString
+  dbf_id: MyString
+  name: MyString
+  card_set: MyString
+  type: 
+  rarity: MyString
+  cost: MyString
+  player_class: MyString
+  img: MyString
+  mechanics: MyString
+
+two:
+  card_id: MyString
+  dbf_id: MyString
+  name: MyString
+  card_set: MyString
+  type: 
+  rarity: MyString
+  cost: MyString
+  player_class: MyString
+  img: MyString
+  mechanics: MyString
