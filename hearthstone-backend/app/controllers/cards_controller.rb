@@ -6,6 +6,6 @@ class CardsController < ApplicationController
             cards = Card.all
         end
 
-        render json: cards
+        render json: cards[0..3]
     end
 end
