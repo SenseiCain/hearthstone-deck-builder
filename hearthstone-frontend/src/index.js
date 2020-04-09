@@ -1,4 +1,5 @@
 const BASE_URL = 'http://localhost:3000'
+let activeHero = '';
 
 window.addEventListener('DOMContentLoaded', (e) => {
     renderHeros()
@@ -20,7 +21,10 @@ async function renderHeros() {
         const btn = document.createElement('button')
         btn.innerText = el.player_class
         btn.id = `btn-${el.player_class.replace(/\s+/g, '-').toLowerCase()}`;
-        btn.addEventListener('click', e => renderCards(el.player_class))
+        btn.addEventListener('click', e => {
+            activeHero = el.player_class
+            renderCards(el.player_class)
+        })
 
         heroContainerEl.appendChild(btn)
     })
@@ -49,4 +53,30 @@ async function getCards(className) {
     const resp = await fetch(`${BASE_URL}/cards?class=${className}`)
     const json = await resp.json()
     return json
+}
+
+// -- DOM EVENTS --
+function switchCardType(e) {
+    if (e.id === 'class-select' && e.classList.contains('inactive')) {
+        // Switch selected
+        e.classList.remove('inactive')
+        e.classList.add('active')
+        let sibling = document.querySelector('#neutral-select')
+        sibling.classList.remove('active')
+        sibling.classList.add('inactive')
+        // Fecth Class Cards
+        if (activeHero !== '') {
+            renderCards(activeHero)
+        }
+
+    } else if (e.id === 'neutral-select' && e.classList.contains('inactive')) {
+        // Switch selected
+        e.classList.remove('inactive')
+        e.classList.add('active')
+        let sibling = document.querySelector('#class-select')
+        sibling.classList.remove('active')
+        sibling.classList.add('inactive')
+        // Fecth Neutral cards
+        renderCards('Neutral')
+    }
 }

@@ -27,10 +27,10 @@
                 <div id="query-container" class="py-4 bg-dark mb-3"></div>
                 <div>
                     <div class="row">
-                        <div class="col-6 bg-info py-3 text-white">Class</div>
-                        <div class="col-6 bg-danger py-3 text-white">Neutral</div>
+                        <div id="class-select" class="col-6 py-3 text-white active" onclick="switchCardType(this)">Class</div>
+                        <div id="neutral-select" class="col-6 py-3 text-white inactive" onclick="switchCardType(this)">Neutral</div>
                     </div>
-                    <div id="cards-display" class="row d-flex flew-wrap overflow-auto bg-info py-5"></div>
+                    <div id="cards-display" class="row d-flex flew-wrap overflow-auto bg-info py-3"></div>
                 </div>
             </div>
             <div class="col-md-3 bg-info py-5"></div>
