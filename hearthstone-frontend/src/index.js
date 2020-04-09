@@ -32,16 +32,17 @@ async function renderCards(className) {
     const cardsContainerEl = document.querySelector('#cards-display')
 
     cardsContainerEl.innerHTML = ""
-
-    const ulEl = document.createElement('ul')
     
     cardData.forEach(el => {
-        const li = document.createElement('li')
-        li.innerText = el.name
-        ulEl.appendChild(li)
-    })
+        const divEl = document.createElement('div')
+        divEl.classList.add('col-xs-12', 'col-sm-6', 'col-md-4', 'col-lg-3')
+        
+        const imgEl = document.createElement('img')
+        imgEl.src = el.img
+        divEl.appendChild(imgEl)
 
-    cardsContainerEl.appendChild(ulEl)
+        cardsContainerEl.appendChild(divEl)
+    })
 }
 
 async function getCards(className) {
