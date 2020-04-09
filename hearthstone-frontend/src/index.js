@@ -29,7 +29,19 @@ async function renderHeros() {
 // -- CARDS --
 async function renderCards(className) {
     const cardData = await getCards(className)
-    console.log(cardData)
+    const cardsContainerEl = document.querySelector('#cards-display')
+
+    cardsContainerEl.innerHTML = ""
+
+    const ulEl = document.createElement('ul')
+    
+    cardData.forEach(el => {
+        const li = document.createElement('li')
+        li.innerText = el.name
+        ulEl.appendChild(li)
+    })
+
+    cardsContainerEl.appendChild(ulEl)
 }
 
 async function getCards(className) {
