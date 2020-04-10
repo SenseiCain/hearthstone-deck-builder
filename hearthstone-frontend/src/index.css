@@ -2,6 +2,10 @@ header img {
     height: 100px;
 }
 
+.query-field {
+    height: 30px;
+}
+
 #cards-display {
     max-height: 700px;
 }
@@ -9,6 +13,10 @@ header img {
 #cards-display img {
     width: 100%;
     height: 100%;
+}
+
+#class-select, #neutral-select {
+    cursor: pointer;
 }
 
 .active {
