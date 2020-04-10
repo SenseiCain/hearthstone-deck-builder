@@ -1,9 +1,12 @@
 const BASE_URL = 'http://localhost:3000'
-let activeHero = 'Mage';
 
-window.addEventListener('DOMContentLoaded', (e) => {
-    renderHeros()
-    renderCards(activeHero)
+window.addEventListener('DOMContentLoaded', async (e) => {
+    // APPEND HERO BUTTONS
+    const heroData = await getHeros();
+    Hero.massAssign(heroData)
+    const heroEls = Hero.renderAll();
+    const heroContainerEl = document.querySelector('#heros-section')
+    heroEls.forEach(el => heroContainerEl.appendChild(el))
 });
 
 
@@ -14,29 +17,6 @@ async function getHeros() {
     return json
 }
 
-async function renderHeros() {
-    const heroData = await getHeros()
-    const heroContainerEl = document.querySelector('#heros-section')
-
-    heroData.forEach(el => {
-        const btn = document.createElement('button')
-        btn.innerText = el.player_class
-        btn.id = `btn-${el.player_class.replace(/\s+/g, '-').toLowerCase()}`;
-        btn.addEventListener('click', e => {
-            activeHero = el.player_class
-            let activeButton = document.querySelector('#class-select')
-
-            if (activeButton.classList.contains('inactive')) {
-                makeClassActive()
-            }
-
-            renderCards(el.player_class)
-        })
-
-        heroContainerEl.appendChild(btn)
-    })
-}
-
 // -- CARDS --
 async function renderCards(className) {
     const cardData = await getCards(className)
@@ -45,6 +25,7 @@ async function renderCards(className) {
     cardsContainerEl.innerHTML = ""
     
     cardData.forEach(el => {
+
         const divEl = document.createElement('div')
         divEl.classList.add('col-xs-12', 'col-sm-6', 'col-md-4', 'col-lg-3')
         
@@ -62,13 +43,17 @@ async function getCards(className) {
     return json
 }
 
+// form onchage -> changeDisplayedCards() -> Card.renderAll()
+
 // -- DOM EVENTS --
 function switchCardType(e) {
     if (e.id === 'class-select' && e.classList.contains('inactive')) {
         makeClassActive()
+        // -- OOP
         renderCards(activeHero)
     } else if (e.id === 'neutral-select' && e.classList.contains('inactive')) {
         makeNeutralActive()
+        // -- OOP
         renderCards('Neutral')
     }
 }
