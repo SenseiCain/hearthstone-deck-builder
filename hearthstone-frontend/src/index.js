@@ -1,8 +1,9 @@
 const BASE_URL = 'http://localhost:3000'
-let activeHero = '';
+let activeHero = 'Mage';
 
 window.addEventListener('DOMContentLoaded', (e) => {
     renderHeros()
+    renderCards(activeHero)
 });
 
 
@@ -23,6 +24,12 @@ async function renderHeros() {
         btn.id = `btn-${el.player_class.replace(/\s+/g, '-').toLowerCase()}`;
         btn.addEventListener('click', e => {
             activeHero = el.player_class
+            let activeButton = document.querySelector('#class-select')
+
+            if (activeButton.classList.contains('inactive')) {
+                makeClassActive()
+            }
+
             renderCards(el.player_class)
         })
 
@@ -58,25 +65,30 @@ async function getCards(className) {
 // -- DOM EVENTS --
 function switchCardType(e) {
     if (e.id === 'class-select' && e.classList.contains('inactive')) {
-        // Switch selected
-        e.classList.remove('inactive')
-        e.classList.add('active')
-        let sibling = document.querySelector('#neutral-select')
-        sibling.classList.remove('active')
-        sibling.classList.add('inactive')
-        // Fecth Class Cards
-        if (activeHero !== '') {
-            renderCards(activeHero)
-        }
-
+        makeClassActive()
+        renderCards(activeHero)
     } else if (e.id === 'neutral-select' && e.classList.contains('inactive')) {
-        // Switch selected
-        e.classList.remove('inactive')
-        e.classList.add('active')
-        let sibling = document.querySelector('#class-select')
-        sibling.classList.remove('active')
-        sibling.classList.add('inactive')
-        // Fecth Neutral cards
+        makeNeutralActive()
         renderCards('Neutral')
     }
+}
+
+function makeClassActive() {
+    let classBtn = document.querySelector('#class-select')
+    classBtn.classList.remove('inactive')
+    classBtn.classList.add('active')
+
+    let neutralBtn = document.querySelector('#neutral-select')
+    neutralBtn.classList.remove('active')
+    neutralBtn.classList.add('inactive')
+}
+
+function makeNeutralActive() {
+    let classBtn = document.querySelector('#class-select')
+    classBtn.classList.remove('active')
+    classBtn.classList.add('inactive')
+
+    let neutralBtn = document.querySelector('#neutral-select')
+    neutralBtn.classList.remove('inactive')
+    neutralBtn.classList.add('active')
 }
