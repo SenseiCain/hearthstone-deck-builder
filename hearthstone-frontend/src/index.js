@@ -41,12 +41,9 @@ async function updateCardsDisplayed(playerClass, setType, queryObj){
     const setAttr = setType ? {set_type: setType} : {set_type: CARD_CONFIGS.set_type};
     const new_configs = Object.assign({}, CARD_CONFIGS, playerAttr, setAttr);
 
-    // RE-RENDER NEW CARDS,
-    // ONLY WHEN THE FN IS CALLED &
-    // THE CARDS LISTED ARE CHANGED
+    // RE-RENDER NEW CARDS ONLY WHEN CONFIGS CHANGE
     if (JSON.stringify(CARD_CONFIGS) !== JSON.stringify(new_configs)) {
         let cardData;
-        
         
         if (playerClass) {
             cardData = await getCards(new_configs.class_type);
@@ -67,37 +64,3 @@ async function updateCardsDisplayed(playerClass, setType, queryObj){
         CARD_CONFIGS = new_configs;
     }
 }
-
-
-// -- DOM EVENTS --
-// function switchCardType(e) {
-//     if (e.id === 'class-select' && e.classList.contains('inactive')) {
-//         makeClassActive()
-//         // -- OOP
-//         renderCards(activeHero)
-//     } else if (e.id === 'neutral-select' && e.classList.contains('inactive')) {
-//         makeNeutralActive()
-//         // -- OOP
-//         renderCards('Neutral')
-//     }
-// }
-
-// function makeClassActive() {
-//     let classBtn = document.querySelector('#class-select')
-//     classBtn.classList.remove('inactive')
-//     classBtn.classList.add('active')
-
-//     let neutralBtn = document.querySelector('#neutral-select')
-//     neutralBtn.classList.remove('active')
-//     neutralBtn.classList.add('inactive')
-// }
-
-// function makeNeutralActive() {
-//     let classBtn = document.querySelector('#class-select')
-//     classBtn.classList.remove('active')
-//     classBtn.classList.add('inactive')
-
-//     let neutralBtn = document.querySelector('#neutral-select')
-//     neutralBtn.classList.remove('inactive')
-//     neutralBtn.classList.add('active')
-// }
