@@ -27,7 +27,7 @@
     <section id="main" class="container bg-light pb-5 d-flex justify-content-between">
             <div id="cards-container" class="col-md-8 px-0">
                 <div id="query-container" class="row mb-3 d-flex flex-wrap">
-                    <form id="query-form" class="col-12 d-flex flex-wrap p-0" onchange="updateQuery()" onsubmit="event.preventDefault()">
+                    <form id="query-form" class="col-12 d-flex flex-wrap p-0" onchange="updateCardsDisplayed()" onsubmit="event.preventDefault()">
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">@</span>
@@ -88,7 +88,7 @@
                         </div>
 
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <button class="btn form-control bg-info text-white" onclick="resetCards()">Reset</button>
+                            <button class="btn form-control bg-info text-white" onclick="updateCardsDisplayed()">Reset</button>
                         </div>
 
                     </form>

@@ -23,25 +23,23 @@ class Card {
         })
     }
 
-    static updateList(objArray){
-        ALL_CARDS = [];
-        objArray.forEach(obj => {
-            new this(obj);
-        })
-    }
-
     static renderQuery(queryObj) {
+        let queryArray = [];
         let result = [];
 
         // TODO - REFACTOR
-        const queryArray = ALL_CARDS.filter(el => {
-            if (((queryObj.type) ? (el.card_type === queryObj.type) : true)
-                && ((queryObj.rarity) ? (el.rarity === queryObj.rarity) : true)
-                && ((queryObj.cost && queryObj.cost < 7) ? (el.cost == queryObj.cost) : true)
-                && ((queryObj.cost && queryObj.cost >= 7) ? (el.cost >= 7) : true)
-                && ((queryObj.race) ? (el.race === queryObj.race) : true)){
-                return true;
+        ALL_CARDS.forEach(el => {
+
+            if (el.player_class === queryObj.class_type
+                && ((queryObj.query.rarity) ? el.rarity == queryObj.query.rarity : true)
+                && ((queryObj.query.cost && queryObj.query.cost < 7) ? el.cost == queryObj.query.cost : true)
+                && ((queryObj.query.cost && queryObj.query.cost >= 7) ? el.cost >= 7 : true)
+                && ((queryObj.query.race) ? el.race == queryObj.query.race : true)
+                && ((queryObj.query.type) ? el.card_type == queryObj.query.type : true)
+            ){
+                queryArray.push(el)
             }
+
         })
 
         queryArray.forEach(obj => {
@@ -51,11 +49,13 @@ class Card {
         return result;
     }
 
-    static renderAll(){
+    static renderClass(classType){
         let result = [];
 
         ALL_CARDS.forEach(obj => {
-            result.push(this.render(obj));
+            if (obj.player_class == classType) {
+                result.push(this.render(obj));
+            }
         })
 
         return result;
