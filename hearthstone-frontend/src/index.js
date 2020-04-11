@@ -11,6 +11,7 @@ let CARD_CONFIGS = {
     }
 };
 
+
 window.addEventListener('DOMContentLoaded', async (e) => {
     // Create Hero instances & append buttons
     const heroData = await getHeros();
@@ -53,11 +54,12 @@ async function updateCardsDisplayed(playerClass, setType){
     const eventTag = event.target.tagName;
 
     // RE-RENDER NEW CARDS ONLY WHEN CONFIGS CHANGE
+    // QUERY CHANGED
     if (eventTag === 'SELECT' || eventTag === 'INPUT'){
-        renderCardsWithQuery(CARD_CONFIGS.query);
         CARD_CONFIGS = new_configs;
+        renderCardsWithQuery(CARD_CONFIGS.query);
     } else if (JSON.stringify(CARD_CONFIGS) !== JSON.stringify(new_configs)) {
-        
+        // PLAYER CLASS CHANGED
         if (playerClass) {
             cardData = await getCards(new_configs.class_type);
             Card.updateList(cardData);
@@ -65,6 +67,7 @@ async function updateCardsDisplayed(playerClass, setType){
 
             resetQueryConfig();
         } else {
+            // SWTICH BETWEEN NEUTRAL & CLASS CARDS
             if (new_configs.set_type === 'neutral') {
                 cardData = await getCards('Neutral');
                 Card.updateList(cardData);
@@ -79,6 +82,7 @@ async function updateCardsDisplayed(playerClass, setType){
     }
 }
 
+// -- CALLBACKS --
 function updateQuery() {
     const updated_hash = {};
     updated_hash[event.target.name] = event.target.value
@@ -102,7 +106,7 @@ function renderCardsWithQuery(queryObj) {
 
 function resetQueryConfig(){
     // TODO - reset select options to default
-    
+
     const emptyQuery = {
         query: {
             name: '',
