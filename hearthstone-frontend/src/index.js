@@ -1,12 +1,16 @@
 const BASE_URL = 'http://localhost:3000'
 
 window.addEventListener('DOMContentLoaded', async (e) => {
-    // APPEND HERO BUTTONS
+    // Create Hero instances & append buttons
     const heroData = await getHeros();
     Hero.massAssign(heroData)
     const heroEls = Hero.renderAll();
     const heroContainerEl = document.querySelector('#heros-section')
     heroEls.forEach(el => heroContainerEl.appendChild(el))
+
+    // Cards
+    const cardData = await getCards('Hunter');
+    Card.massAssign(cardData);
 });
 
 
