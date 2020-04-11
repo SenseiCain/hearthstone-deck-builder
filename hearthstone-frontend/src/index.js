@@ -65,7 +65,7 @@ async function updateCardsDisplayed(playerClass, setType){
             Card.updateList(cardData);
             renderCards(cardData);
 
-            resetQueryConfig();
+            resetQueryConfig(playerClass);
         } else {
             // SWTICH BETWEEN NEUTRAL & CLASS CARDS
             if (new_configs.set_type === 'neutral') {
@@ -110,14 +110,16 @@ function updateQuery() {
     updateCardsDisplayed()
 }
 
-function resetQueryConfig(){
+function resetQueryConfig(playerClass){
     // RESET SELECT VALUES
     document.querySelector('#select-rarity').value = "";
     document.querySelector('#select-cost').value = "";
     document.querySelector('#select-race').value = "";
     document.querySelector('#select-type').value = "";
 
-    const emptyQuery = {
+    const newConfig = {
+        class_type: (playerClass) ? playerClass : CARD_CONFIGS.class_type,
+        set_type: (playerClass) ? 'classic' : CARD_CONFIGS.set_type,
         query: {
             name: '',
             rarity: '',
@@ -127,5 +129,5 @@ function resetQueryConfig(){
         }
     }
 
-    CARD_CONFIGS = Object.assign({}, CARD_CONFIGS, emptyQuery)
+    CARD_CONFIGS = Object.assign({}, newConfig)
 }
