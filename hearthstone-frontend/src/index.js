@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:3000'
 let CARD_CONFIGS = {
-    set_type: 'classic',
+    set_type: 'Classic',
     class_type: 'Hunter',
     query: {
         name: '',
@@ -44,12 +44,9 @@ async function getCards() {
 }
 
 // -- CARD RENDERING ALGORITHM --
+// Main callback for rendering. Updates gloabl card_config,
+// queries cards based on config, then renders resulting cards.
 async function updateCardsDisplayed(playerClass, setType){
-    // TODO - REFACTOR
-    // ONLY USED FOR SWITCHING TO CLASSIC
-    const playerAttr = playerClass ? {class_type: playerClass} : {class_type: CARD_CONFIGS.class_type};
-    const setAttr = setType ? {set_type: setType} : {set_type: CARD_CONFIGS.set_type};
-    const new_configs = Object.assign({}, CARD_CONFIGS, playerAttr, setAttr);
     
     // EVENT THAT TRIGGERED FN
     const eventTarget = event.target;
@@ -63,16 +60,16 @@ async function updateCardsDisplayed(playerClass, setType){
         renderCardsWithQuery();
     } else if (CARD_CONFIGS.class_type !== new_configs.class_type) {
         // HERO CHANGED
-        CARD_CONFIGS = defaultConfig(new_configs.class_type);
+        CARD_CONFIGS = defaultConfig(playerClass);
         resetQuerySelectors();
         renderCards();
-    } else if (CARD_CONFIGS.set_type !== new_configs.set_type) {
+    } else if (CARD_CONFIGS.set_type !== setType) {
         // SWITCH BETWEEN NEUTRAL & CLASS CARDS
-        CARD_CONFIGS = new_configs;
+        CARD_CONFIGS = changeSetConfig(setType);
         renderCardsWithQuery(); 
     } else if (eventTag === 'BUTTON') {
         // RESET BUTTON
-        CARD_CONFIGS = defaultConfig(new_configs.class_type);
+        CARD_CONFIGS = defaultConfig();
         resetQuerySelectors();
         renderCards();
     }
@@ -82,7 +79,7 @@ async function updateCardsDisplayed(playerClass, setType){
 function defaultConfig(playerClass) {
     const defaultObj = {
         class_type: (playerClass) ? playerClass : CARD_CONFIGS.class_type,
-        set_type: 'classic',
+        set_type: 'Classic',
         query: {
             name: '',
             rarity: '',
@@ -93,6 +90,12 @@ function defaultConfig(playerClass) {
     }
 
     return Object.assign({}, defaultObj)
+}
+
+function changeSetConfig(setType) {
+    let newConfigObj = Object.assign({}, CARD_CONFIGS);
+    newConfigObj.set_type = setType;
+    return Object.assign({}, newConfigObj);
 }
 
 function updateQueryConfig(name, value) {

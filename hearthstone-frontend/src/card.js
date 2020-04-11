@@ -30,7 +30,8 @@ class Card {
         // TODO - REFACTOR
         ALL_CARDS.forEach(el => {
 
-            if (el.player_class === queryObj.class_type
+            if (
+                ((queryObj.set_type === 'Neutral') ? el.player_class === 'Neutral' : el.player_class === queryObj.class_type)
                 && ((queryObj.query.rarity) ? el.rarity == queryObj.query.rarity : true)
                 && ((queryObj.query.cost && queryObj.query.cost < 7) ? el.cost == queryObj.query.cost : true)
                 && ((queryObj.query.cost && queryObj.query.cost >= 7) ? el.cost >= 7 : true)
