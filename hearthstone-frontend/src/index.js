@@ -1,8 +1,14 @@
 const BASE_URL = 'http://localhost:3000'
 let CARD_CONFIGS = {
     set_type: 'classic',
-    class_type: 'Hunter'
-    // QUERY: {}
+    class_type: 'Hunter',
+    query: {
+        name: '',
+        rarity: '',
+        cost: '',
+        race: '',
+        type: ''
+    }
 };
 
 window.addEventListener('DOMContentLoaded', async (e) => {
@@ -36,7 +42,8 @@ async function getCards(className) {
     return json
 }
 
-async function updateCardsDisplayed(playerClass, setType, queryObj){
+// -- DOM MANIUPLATIONS --
+async function updateCardsDisplayed(playerClass, setType){
     const playerAttr = playerClass ? {class_type: playerClass} : {class_type: CARD_CONFIGS.class_type};
     const setAttr = setType ? {set_type: setType} : {set_type: CARD_CONFIGS.set_type};
     const new_configs = Object.assign({}, CARD_CONFIGS, playerAttr, setAttr);
@@ -47,12 +54,14 @@ async function updateCardsDisplayed(playerClass, setType, queryObj){
         
         if (playerClass) {
             cardData = await getCards(new_configs.class_type);
+            // RESET FILTERS
         } else {
             if (new_configs.set_type === 'neutral') {
                 cardData = await getCards('Neutral');
             } else {
                 cardData = await getCards(new_configs.class_type);
             }
+            // APPLY FILTERS
         }
 
         const cardsContainerEl = document.querySelector('#cards-display');
@@ -63,4 +72,11 @@ async function updateCardsDisplayed(playerClass, setType, queryObj){
 
         CARD_CONFIGS = new_configs;
     }
+}
+
+function updateQuery() {
+    const updated_hash = {};
+    updated_hash[event.target.name] = event.target.value
+    CARD_CONFIGS.query = Object.assign({}, CARD_CONFIGS.query, updated_hash)
+    console.log(CARD_CONFIGS.query)
 }
