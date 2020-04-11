@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <select name="rarity" class="form-control">
+                            <select id="select-rarity" name="rarity" class="form-control">
                                 <option value="" selected>All Rarity</option>
                                 <option value="Free">Free</option>
                                 <option value="Common">Common</option>
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <select name="cost" class="form-control">
+                            <select id="select-cost" name="cost" class="form-control">
                                 <option value="" selected>All Cost</option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <select name="race" class="form-control">
+                            <select id="select-race" name="race" class="form-control">
                                 <option value="" selected>All Races</option>
                                 <option value="Beast">Beast</option>
                                 <option value="Demon">Demon</option>
@@ -76,7 +76,7 @@
 
 
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <select name="type" class="form-control">
+                            <select id="select-type" name="type" class="form-control">
                                 <option value="" selected>All Types</option>
                                 <option value="Enchantment">Enchantment</option>
                                 <option value="Hero">Hero</option>
@@ -85,6 +85,10 @@
                                 <option value="Spell">Spell</option>
                                 <option value="Weapon">Weapon</option>
                             </select>
+                        </div>
+
+                        <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <button class="btn form-control bg-info text-white" onclick="resetCards()">Reset</button>
                         </div>
 
                     </form>
