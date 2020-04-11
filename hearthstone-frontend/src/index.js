@@ -42,32 +42,40 @@ async function getCards(className) {
     return json
 }
 
-// -- DOM MANIUPLATIONS --
+// -- CARD RENDERING ALGORITHM --
 async function updateCardsDisplayed(playerClass, setType){
     const playerAttr = playerClass ? {class_type: playerClass} : {class_type: CARD_CONFIGS.class_type};
     const setAttr = setType ? {set_type: setType} : {set_type: CARD_CONFIGS.set_type};
     const new_configs = Object.assign({}, CARD_CONFIGS, playerAttr, setAttr);
 
+    let cardData;
+    
+    const eventTag = event.target.tagName;
+
     // RE-RENDER NEW CARDS ONLY WHEN CONFIGS CHANGE
-    if (JSON.stringify(CARD_CONFIGS) !== JSON.stringify(new_configs)) {
-        let cardData;
+    if (eventTag === 'SELECT' || eventTag === 'INPUT'){
+        renderCardsWithQuery(CARD_CONFIGS.query);
+        CARD_CONFIGS = new_configs;
+    } else if (JSON.stringify(CARD_CONFIGS) !== JSON.stringify(new_configs)) {
         
         if (playerClass) {
-            // RESET FILTERS
             cardData = await getCards(new_configs.class_type);
+            Card.updateList(cardData);
             renderCards(cardData);
+
+            resetQueryConfig();
         } else {
             if (new_configs.set_type === 'neutral') {
                 cardData = await getCards('Neutral');
-                renderCards(cardData);
+                Card.updateList(cardData);
+                renderCardsWithQuery(CARD_CONFIGS.query)
             } else {
                 cardData = await getCards(new_configs.class_type);
-                renderCards(cardData);
+                Card.updateList(cardData);
+                renderCardsWithQuery(CARD_CONFIGS.query)
             }
-            // APPLY FILTERS
+            CARD_CONFIGS = new_configs;
         }   
-
-        CARD_CONFIGS = new_configs;
     }
 }
 
@@ -75,13 +83,35 @@ function updateQuery() {
     const updated_hash = {};
     updated_hash[event.target.name] = event.target.value
     CARD_CONFIGS.query = Object.assign({}, CARD_CONFIGS.query, updated_hash)
-    console.log(CARD_CONFIGS.query)
+    updateCardsDisplayed()
 }
 
-function renderCards(cards) {
+function renderCards() {
     const cardsContainerEl = document.querySelector('#cards-display');
     cardsContainerEl.innerHTML = "";
-    Card.updateList(cards);
     const cardEls = Card.renderAll();
     cardEls.forEach(el => cardsContainerEl.appendChild(el))
+}
+
+function renderCardsWithQuery(queryObj) {
+    const cardsContainerEl = document.querySelector('#cards-display');
+    cardsContainerEl.innerHTML = "";
+    const cardEls = Card.renderQuery(queryObj);
+    cardEls.forEach(el => cardsContainerEl.appendChild(el))
+}
+
+function resetQueryConfig(){
+    // TODO - reset select options to default
+    
+    const emptyQuery = {
+        query: {
+            name: '',
+            rarity: '',
+            cost: '',
+            race: '',
+            type: ''
+        }
+    }
+
+    CARD_CONFIGS = Object.assign({}, CARD_CONFIGS, emptyQuery)
 }

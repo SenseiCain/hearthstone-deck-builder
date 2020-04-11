@@ -29,6 +29,36 @@ class Card {
         })
     }
 
+    // query: {
+    //     name: '',
+    //     rarity: '',
+    //     cost: '',
+    //     race: '',
+    //     type: ''
+    // }
+
+    static renderQuery(queryObj) {
+        let result = [];
+
+        const queryArray = ALL_CARDS.filter(el => {
+            console.log(el.card_type, queryObj.type)
+            return (queryObj.type) ? (el.card_type == queryObj.type) : true;
+        })
+
+        queryArray.forEach(obj => {
+            const divEl = document.createElement('div')
+            divEl.classList.add('col-xs-12', 'col-sm-6', 'col-md-4', 'col-lg-3')
+            
+            const imgEl = document.createElement('img')
+            imgEl.src = obj.img
+            divEl.appendChild(imgEl)
+
+            result.push(divEl);
+        })
+
+        return result;
+    }
+
     static renderAll(){
         let result = [];
 
