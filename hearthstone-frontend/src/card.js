@@ -8,6 +8,7 @@ class Card {
         this.card_set = obj.card_set;
         this.card_type = obj.card_type;
         this.rarity = obj.rarity;
+        this.race = obj.race;
         this.cost = obj.cost;
         this.player_class = obj.player_class;
         this.img = obj.img;
@@ -29,31 +30,22 @@ class Card {
         })
     }
 
-    // query: {
-    //     name: '',
-    //     rarity: '',
-    //     cost: '',
-    //     race: '',
-    //     type: ''
-    // }
-
     static renderQuery(queryObj) {
         let result = [];
 
+        // TODO - REFACTOR
         const queryArray = ALL_CARDS.filter(el => {
-            console.log(el.card_type, queryObj.type)
-            return (queryObj.type) ? (el.card_type == queryObj.type) : true;
+            if (((queryObj.type) ? (el.card_type === queryObj.type) : true)
+                && ((queryObj.rarity) ? (el.rarity === queryObj.rarity) : true)
+                && ((queryObj.cost && queryObj.cost < 7) ? (el.cost == queryObj.cost) : true)
+                && ((queryObj.cost && queryObj.cost >= 7) ? (el.cost >= 7) : true)
+                && ((queryObj.race) ? (el.race === queryObj.race) : true)){
+                return true;
+            }
         })
 
         queryArray.forEach(obj => {
-            const divEl = document.createElement('div')
-            divEl.classList.add('col-xs-12', 'col-sm-6', 'col-md-4', 'col-lg-3')
-            
-            const imgEl = document.createElement('img')
-            imgEl.src = obj.img
-            divEl.appendChild(imgEl)
-
-            result.push(divEl);
+            result.push(this.render(obj));
         })
 
         return result;
@@ -63,17 +55,21 @@ class Card {
         let result = [];
 
         ALL_CARDS.forEach(obj => {
-            const divEl = document.createElement('div')
-            divEl.classList.add('col-xs-12', 'col-sm-6', 'col-md-4', 'col-lg-3')
-            
-            const imgEl = document.createElement('img')
-            imgEl.src = obj.img
-            divEl.appendChild(imgEl)
-
-            result.push(divEl);
+            result.push(this.render(obj));
         })
 
         return result;
+    }
+
+    static render(obj) {
+        const divEl = document.createElement('div')
+        divEl.classList.add('col-xs-12', 'col-sm-6', 'col-md-4', 'col-lg-3')
+        
+        const imgEl = document.createElement('img')
+        imgEl.src = obj.img
+        divEl.appendChild(imgEl)
+
+        return divEl;
     }
 
     get all(){
