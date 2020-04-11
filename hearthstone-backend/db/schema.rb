@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_08_181542) do
+ActiveRecord::Schema.define(version: 2020_04_11_194058) do
 
   create_table "cards", force: :cascade do |t|
     t.string "card_id"
@@ -19,12 +19,13 @@ ActiveRecord::Schema.define(version: 2020_04_08_181542) do
     t.string "card_set"
     t.string "card_type"
     t.string "rarity"
-    t.string "cost"
+    t.integer "cost"
     t.string "player_class"
     t.string "img"
     t.string "mechanics"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "race"
   end
 
   create_table "heros", force: :cascade do |t|
