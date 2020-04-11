@@ -58,12 +58,12 @@ async function updateCardsDisplayed(playerClass, setType){
         // QUERY CHANGED
         CARD_CONFIGS = updateQueryConfig(eventName, eventValue)
         renderCardsWithQuery();
-    } else if (CARD_CONFIGS.class_type !== new_configs.class_type) {
+    } else if (playerClass && CARD_CONFIGS.class_type !== playerClass) {
         // HERO CHANGED
         CARD_CONFIGS = defaultConfig(playerClass);
         resetQuerySelectors();
         renderCards();
-    } else if (CARD_CONFIGS.set_type !== setType) {
+    } else if (setType && CARD_CONFIGS.set_type !== setType) {
         // SWITCH BETWEEN NEUTRAL & CLASS CARDS
         CARD_CONFIGS = changeSetConfig(setType);
         renderCardsWithQuery(); 
