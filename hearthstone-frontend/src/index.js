@@ -53,22 +53,19 @@ async function updateCardsDisplayed(playerClass, setType){
         let cardData;
         
         if (playerClass) {
-            cardData = await getCards(new_configs.class_type);
             // RESET FILTERS
+            cardData = await getCards(new_configs.class_type);
+            renderCards(cardData);
         } else {
             if (new_configs.set_type === 'neutral') {
                 cardData = await getCards('Neutral');
+                renderCards(cardData);
             } else {
                 cardData = await getCards(new_configs.class_type);
+                renderCards(cardData);
             }
             // APPLY FILTERS
-        }
-
-        const cardsContainerEl = document.querySelector('#cards-display');
-        cardsContainerEl.innerHTML = "";
-        Card.updateList(cardData);
-        const cardEls = Card.renderAll();
-        cardEls.forEach(el => cardsContainerEl.appendChild(el))
+        }   
 
         CARD_CONFIGS = new_configs;
     }
@@ -79,4 +76,12 @@ function updateQuery() {
     updated_hash[event.target.name] = event.target.value
     CARD_CONFIGS.query = Object.assign({}, CARD_CONFIGS.query, updated_hash)
     console.log(CARD_CONFIGS.query)
+}
+
+function renderCards(cards) {
+    const cardsContainerEl = document.querySelector('#cards-display');
+    cardsContainerEl.innerHTML = "";
+    Card.updateList(cards);
+    const cardEls = Card.renderAll();
+    cardEls.forEach(el => cardsContainerEl.appendChild(el))
 }
