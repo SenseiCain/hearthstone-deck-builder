@@ -30,7 +30,7 @@ class Hero {
             btn.innerText = obj.player_class;
             btn.id = `btn-${obj.player_class.replace(/\s+/g, '-').toLowerCase()}`;
             btn.addEventListener('click', e => {
-                renderCards(obj.player_class)
+                updateCardsDisplayed(obj.player_class, 'classic')
             });
 
             result.push(btn)
