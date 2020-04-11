@@ -27,17 +27,17 @@
     <section id="main" class="container bg-light pb-5 d-flex justify-content-between">
             <div id="cards-container" class="col-md-8 px-0">
                 <div id="query-container" class="row mb-3 d-flex flex-wrap">
-                    <form class="col-12 d-flex flex-wrap p-0">
+                    <form class="col-12 d-flex flex-wrap p-0" onchange="updateQuery()" onsubmit="event.preventDefault()">
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">@</span>
                             </div>
-                            <input type="text" class="form-control col-12" placeholder="Search"></input>
+                            <input name="name" type="text" class="form-control col-12" placeholder="Search"></input>
                         </div>
 
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <select name="rarity" class="form-control">
-                                <option selected>All Rarity</option>
+                                <option value="" selected>All Rarity</option>
                                 <option value="free">Free</option>
                                 <option value="common">Common</option>
                                 <option value="rare">Rare</option>
@@ -48,7 +48,7 @@
 
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <select name="cost" class="form-control">
-                                <option selected>All Cost</option>
+                                <option value="" selected>All Cost</option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -62,7 +62,7 @@
 
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <select name="race" class="form-control">
-                                <option selected>All Races</option>
+                                <option value="" selected>All Races</option>
                                 <option value="beast">Beast</option>
                                 <option value="demon">Demon</option>
                                 <option value="dragon">Dragon</option>
@@ -77,19 +77,13 @@
 
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <select name="type" class="form-control">
-                                <option selected>All Types</option>
+                                <option value="" selected>All Types</option>
                                 <option value="enchantment">Enchantment</option>
                                 <option value="hero">Hero</option>
                                 <option value="hero-power">Hero Power</option>
                                 <option value="minion">Minion</option>
                                 <option value="spell">Spell</option>
                                 <option value="weapon">Weapon</option>
-                            </select>
-                        </div>
-
-                        <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <select name="decks" class="form-control bg-info">
-                                <option selected>Decks</option>
                             </select>
                         </div>
 
