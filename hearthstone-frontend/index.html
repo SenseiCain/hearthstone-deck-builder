@@ -27,7 +27,7 @@
     <section id="main" class="container bg-light pb-5 d-flex justify-content-between">
             <div id="cards-container" class="col-md-8 px-0">
                 <div id="query-container" class="row mb-3 d-flex flex-wrap">
-                    <form class="col-12 d-flex flex-wrap p-0" onchange="updateQuery()" onsubmit="event.preventDefault()">
+                    <form id="query-form" class="col-12 d-flex flex-wrap p-0" onchange="updateQuery()" onsubmit="event.preventDefault()">
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">@</span>
@@ -38,11 +38,11 @@
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <select name="rarity" class="form-control">
                                 <option value="" selected>All Rarity</option>
-                                <option value="free">Free</option>
-                                <option value="common">Common</option>
-                                <option value="rare">Rare</option>
-                                <option value="epic">Epic</option>
-                                <option value="legendary">Legendary</option>
+                                <option value="Free">Free</option>
+                                <option value="Common">Common</option>
+                                <option value="Rare">Rare</option>
+                                <option value="Epic">Epic</option>
+                                <option value="Legendary">Legendary</option>
                             </select>
                         </div>
 
@@ -63,14 +63,14 @@
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <select name="race" class="form-control">
                                 <option value="" selected>All Races</option>
-                                <option value="beast">Beast</option>
-                                <option value="demon">Demon</option>
-                                <option value="dragon">Dragon</option>
-                                <option value="elemental">Elemental</option>
-                                <option value="mech">Mech</option>
-                                <option value="murloc">Murloc</option>
-                                <option value="pirate">Pirate</option>
-                                <option value="totem">Totem</option>
+                                <option value="Beast">Beast</option>
+                                <option value="Demon">Demon</option>
+                                <option value="Dragon">Dragon</option>
+                                <option value="Elemental">Elemental</option>
+                                <option value="Mech">Mech</option>
+                                <option value="Murloc">Murloc</option>
+                                <option value="Pirate">Pirate</option>
+                                <option value="Totem">Totem</option>
                             </select>
                         </div>
 
@@ -78,12 +78,12 @@
                         <div class="input-group input-group-sm px-1 pb-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <select name="type" class="form-control">
                                 <option value="" selected>All Types</option>
-                                <option value="enchantment">Enchantment</option>
-                                <option value="hero">Hero</option>
-                                <option value="hero-power">Hero Power</option>
-                                <option value="minion">Minion</option>
-                                <option value="spell">Spell</option>
-                                <option value="weapon">Weapon</option>
+                                <option value="Enchantment">Enchantment</option>
+                                <option value="Hero">Hero</option>
+                                <option value="Hero-Power">Hero Power</option>
+                                <option value="Minion">Minion</option>
+                                <option value="Spell">Spell</option>
+                                <option value="Weapon">Weapon</option>
                             </select>
                         </div>
 
