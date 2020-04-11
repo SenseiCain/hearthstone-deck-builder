@@ -6,6 +6,6 @@ class CardsController < ApplicationController
             cards = Card.all
         end
 
-        render json: cards
+        render json: cards.order(:cost, :name)
     end
 end
