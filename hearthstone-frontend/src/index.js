@@ -29,14 +29,14 @@ window.addEventListener('DOMContentLoaded', async (e) => {
 });
 
 
-// -- HEROS --
+// -- HERO DATA --
 async function getHeros() {
     const resp = await fetch(`${BASE_URL}/heros`)
     const json = await resp.json()
     return json
 }
 
-// -- CARDS --
+// -- CARD DATA --
 async function getCards(className) {
     const resp = await fetch(`${BASE_URL}/cards?class=${className}`)
     const json = await resp.json()
@@ -82,19 +82,17 @@ async function updateCardsDisplayed(playerClass, setType){
     }
 }
 
-// -- CALLBACKS --
-function updateQuery() {
-    const updated_hash = {};
-    updated_hash[event.target.name] = event.target.value
-    CARD_CONFIGS.query = Object.assign({}, CARD_CONFIGS.query, updated_hash)
-    updateCardsDisplayed()
-}
-
+// -- CARD RENDERING --
 function renderCards() {
     const cardsContainerEl = document.querySelector('#cards-display');
     cardsContainerEl.innerHTML = "";
     const cardEls = Card.renderAll();
     cardEls.forEach(el => cardsContainerEl.appendChild(el))
+}
+
+function resetCards(){
+    resetQueryConfig();
+    renderCards();
 }
 
 function renderCardsWithQuery(queryObj) {
@@ -104,8 +102,20 @@ function renderCardsWithQuery(queryObj) {
     cardEls.forEach(el => cardsContainerEl.appendChild(el))
 }
 
+// -- UPDATING CARD CONFIG --
+function updateQuery() {
+    const updated_hash = {};
+    updated_hash[event.target.name] = event.target.value
+    CARD_CONFIGS.query = Object.assign({}, CARD_CONFIGS.query, updated_hash)
+    updateCardsDisplayed()
+}
+
 function resetQueryConfig(){
-    // TODO - reset select options to default
+    // RESET SELECT VALUES
+    document.querySelector('#select-rarity').value = "";
+    document.querySelector('#select-cost').value = "";
+    document.querySelector('#select-race').value = "";
+    document.querySelector('#select-type').value = "";
 
     const emptyQuery = {
         query: {
