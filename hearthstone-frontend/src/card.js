@@ -22,6 +22,30 @@ class Card {
         })
     }
 
+    static updateList(objArray){
+        ALL_CARDS = [];
+        objArray.forEach(obj => {
+            new this(obj);
+        })
+    }
+
+    static renderAll(){
+        let result = [];
+
+        ALL_CARDS.forEach(obj => {
+            const divEl = document.createElement('div')
+            divEl.classList.add('col-xs-12', 'col-sm-6', 'col-md-4', 'col-lg-3')
+            
+            const imgEl = document.createElement('img')
+            imgEl.src = obj.img
+            divEl.appendChild(imgEl)
+
+            result.push(divEl);
+        })
+
+        return result;
+    }
+
     get all(){
         return ALL_CARDS;
     }
