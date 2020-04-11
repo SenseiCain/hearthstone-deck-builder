@@ -25,6 +25,7 @@ cards_data.each do |obj|
         card_type: obj["type"],
         rarity: obj["rarity"],
         cost: obj["cost"],
+        race: obj["race"],
         player_class: obj["playerClass"],
         img: "https://art.hearthstonejson.com/v1/render/latest/enUS/512x/#{obj["cardId"]}.png",
         mechanics: obj["mechanics"]
