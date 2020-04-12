@@ -3,6 +3,7 @@ let CARD_CONFIGS = {
     set_type: 'Classic',
     class_type: 'Hunter',
     query: {
+        search_field: '',
         name: '',
         rarity: '',
         cost: '',
@@ -81,6 +82,7 @@ function defaultConfig(playerClass) {
         class_type: (playerClass) ? playerClass : CARD_CONFIGS.class_type,
         set_type: 'Classic',
         query: {
+            search_field: '',
             name: '',
             rarity: '',
             cost: '',
@@ -121,6 +123,7 @@ function renderCardsWithQuery() {
 
 // -- RESET SELECT VALUES --
 function resetQuerySelectors() {
+    document.querySelector('#search_field').value = "";
     document.querySelector('#select-rarity').value = "";
     document.querySelector('#select-cost').value = "";
     document.querySelector('#select-race').value = "";

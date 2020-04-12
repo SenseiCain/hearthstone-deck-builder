@@ -27,11 +27,17 @@ class Card {
         let queryArray = [];
         let result = [];
 
+        let searchTerm = () => {
+            return queryObj.query.search_field.toLowerCase().split(' ').map(function(word) {
+              return (word.charAt(0).toUpperCase() + word.slice(1));
+            }).join(' ');
+          }
+
         // TODO - REFACTOR
         ALL_CARDS.forEach(el => {
-
             if (
                 ((queryObj.set_type === 'Neutral') ? el.player_class === 'Neutral' : el.player_class === queryObj.class_type)
+                && ((queryObj.query.search_field) ? el.name.includes(searchTerm()) : true)
                 && ((queryObj.query.rarity) ? el.rarity == queryObj.query.rarity : true)
                 && ((queryObj.query.cost && queryObj.query.cost < 7) ? el.cost == queryObj.query.cost : true)
                 && ((queryObj.query.cost && queryObj.query.cost >= 7) ? el.cost >= 7 : true)
