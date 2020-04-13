@@ -22,3 +22,24 @@ header img {
 .inactive {
     background-color: grey;
 }
+
+#deck-class {
+    height: 50px;
+    overflow: hidden;
+    position: relative;
+}
+
+#deck-class h3 {
+    position: absolute;
+    z-index: 2;
+    padding-left: 10px;
+}
+
+#deck-image {
+    height: 100%;
+    width: calc(100% + 60px);
+    padding: 0px;
+    position: absolute;
+    right: 0px;
+    z-index: 1;
+}

@@ -22,6 +22,18 @@ class Hero {
         return ALL_HEROS
     }
 
+    static cardIdByName(queryName) {
+        let result;
+
+        ALL_HEROS.forEach(el => {
+            if (el.player_class == queryName) {
+                result = el;
+            }
+        })
+        
+        return result.card_id;
+    }
+
     static renderAll(){
         let result = [];
 
