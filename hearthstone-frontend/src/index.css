@@ -37,7 +37,7 @@ header img {
 
 #deck-image {
     height: 100%;
-    width: calc(100% + 60px);
+    width: calc(100% + 70px);
     padding: 0px;
     position: absolute;
     right: 0px;
