@@ -153,10 +153,10 @@ function addCardToDeck(card){
             const cardCountEl = document.querySelector(`#deck_${card.card_id} .card-count`)
             cardCountEl.innerText = '2'
         } else {
-            const deckContainerEl = document.querySelector('#deck-cards');
-
             const cardContainerEl = document.createElement('div');
             cardContainerEl.id = `deck_${card.card_id}`;
+            cardContainerEl.setAttribute('cost', card.cost);
+            cardContainerEl.setAttribute('name', card.name)
             cardContainerEl.classList.add('col-12', 'd-flex', 'px-0', 'border-bottom', 'border-white');
 
             const cardManaEl = document.createElement('div');
@@ -177,9 +177,27 @@ function addCardToDeck(card){
             cardContainerEl.appendChild(cardManaEl);
             cardContainerEl.appendChild(cardInfoEl)
             cardContainerEl.appendChild(cardCountEl)
-            deckContainerEl.appendChild(cardContainerEl);
+            appendCardInOrder(cardContainerEl, card.cost, card.name);
+
+            // sortCardsInDeck();
         }
 
         document.querySelector('#deck-count').innerText = `${resp.total}/30`
     }
+}
+
+function appendCardInOrder(cardEl, cardCost, cardName) {
+    const deckContainerEl = document.querySelector('#deck-cards');
+    const cardChildren = [...deckContainerEl.childNodes];
+    const cardAttrs = cardChildren.map(el => {
+        const card_id = el.id;
+        const card_cost = el.attributes.cost.value;
+        const card_name = el.attributes.name.value;
+        
+        return { id: card_id,  cost: card_cost, name: card_name }
+    })
+
+    console.log(cardAttrs)
+
+    deckContainerEl.appendChild(cardEl)
 }

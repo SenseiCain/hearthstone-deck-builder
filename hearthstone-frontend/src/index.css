@@ -48,3 +48,8 @@ header img {
     z-index: 1;
 }
 
+#dust-icon {
+    background: url('https://bnetcmsus-a.akamaihd.net/cms/content_folder_media/SSD3S36X3Z5J1558042454791.png');
+    width: 15px;
+    height: 15px;
+}
