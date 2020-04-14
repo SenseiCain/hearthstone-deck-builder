@@ -147,8 +147,6 @@ function resetDeckTitle() {
 
 function addCardToDeck(card){
     let resp = DECK.addCard(card);
-    
-    console.log(resp)
 
     if(resp.status) {
         if (resp.amount === 1 && !resp.isLegendary) {
@@ -159,7 +157,7 @@ function addCardToDeck(card){
 
             const cardContainerEl = document.createElement('div');
             cardContainerEl.id = `deck_${card.card_id}`;
-            cardContainerEl.classList.add('col-12', 'd-flex', 'px-0', 'pb-1');
+            cardContainerEl.classList.add('col-12', 'd-flex', 'px-0', 'border-bottom', 'border-white');
 
             const cardManaEl = document.createElement('div');
             cardManaEl.classList.add('bg-info', 'col-1', 'p-0', 'text-center', 'text-white');
