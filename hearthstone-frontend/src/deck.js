@@ -13,6 +13,7 @@ class Deck {
         let count = 0;
         let result = false;
         let legendary = false;
+        let card_count;
 
         if (DECK_CARDS.length < 30) {
             
@@ -33,8 +34,10 @@ class Deck {
                 DECK_CARDS.push(card);
                 result = true;
             }
+
+            card_count = DECK_CARDS.length;
         }
 
-        return { status: result, amount: count, isLegendary: legendary };
+        return { status: result, amount: count, isLegendary: legendary, total: card_count };
     }
 }

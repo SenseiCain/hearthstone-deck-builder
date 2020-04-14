@@ -153,7 +153,7 @@ function addCardToDeck(card){
             const cardCountEl = document.querySelector(`#deck_${card.card_id} .card-count`)
             cardCountEl.innerText = '2'
         } else {
-            const deckContainerEl = document.querySelector('#deck-cards')
+            const deckContainerEl = document.querySelector('#deck-cards');
 
             const cardContainerEl = document.createElement('div');
             cardContainerEl.id = `deck_${card.card_id}`;
@@ -179,5 +179,7 @@ function addCardToDeck(card){
             cardContainerEl.appendChild(cardCountEl)
             deckContainerEl.appendChild(cardContainerEl);
         }
+
+        document.querySelector('#deck-count').innerText = `${resp.total}/30`
     }
 }
