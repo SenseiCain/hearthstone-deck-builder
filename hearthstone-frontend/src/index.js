@@ -1,4 +1,6 @@
 const BASE_URL = 'http://localhost:3000'
+let DECK = new Deck;
+
 let CARD_CONFIGS = {
     set_type: 'Classic',
     class_type: 'Hunter',
@@ -141,4 +143,43 @@ function resetDeckTitle() {
     const deckImageEl = document.querySelector('#deck-class img');
     const cardId = Hero.cardIdByName(CARD_CONFIGS.class_type);
     deckImageEl.src = `https://art.hearthstonejson.com/v1/tiles/${cardId}.png`;
+}
+
+function addCardToDeck(card){
+    let resp = DECK.addCard(card);
+    
+    console.log(resp)
+
+    if(resp.status) {
+        if (resp.amount === 1 && !resp.isLegendary) {
+            const cardCountEl = document.querySelector(`#deck_${card.card_id} .card-count`)
+            cardCountEl.innerText = '2'
+        } else {
+            const deckContainerEl = document.querySelector('#deck-cards')
+
+            const cardContainerEl = document.createElement('div');
+            cardContainerEl.id = `deck_${card.card_id}`;
+            cardContainerEl.classList.add('col-12', 'd-flex', 'px-0', 'pb-1');
+
+            const cardManaEl = document.createElement('div');
+            cardManaEl.classList.add('bg-info', 'col-1', 'p-0', 'text-center', 'text-white');
+            cardManaEl.innerText = card.cost;
+
+            const cardInfoEl = document.createElement('div');
+            cardInfoEl.classList.add('col-10', 'bg-dark', 'text-white', 'pl-1', 'font-weight-light');
+            cardInfoEl.innerText = card.name;
+
+            const cardCountEl = document.createElement('div');
+            cardCountEl.classList.add('col-1', 'bg-dark', 'p-0', 'text-center', 'text-info', 'card-count');
+
+            if (resp.isLegendary) {
+                cardCountEl.innerText = "\u2605"
+            }
+
+            cardContainerEl.appendChild(cardManaEl);
+            cardContainerEl.appendChild(cardInfoEl)
+            cardContainerEl.appendChild(cardCountEl)
+            deckContainerEl.appendChild(cardContainerEl);
+        }
+    }
 }
