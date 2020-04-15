@@ -9,6 +9,10 @@ class Deck {
         return DECK_CARDS;
     }
 
+    clear() {
+        DECK_CARDS = [];
+    }
+
     addCard(card) {
         let count = 0;
         let result = false;

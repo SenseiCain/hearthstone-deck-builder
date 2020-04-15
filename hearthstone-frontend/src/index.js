@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', async (e) => {
     const heroEls = Hero.renderAll();
     const heroContainerEl = document.querySelector('#heros-section')
     heroEls.forEach(el => heroContainerEl.appendChild(el))
-    resetDeckTitle();
+    resetDeck();
     
     // Create Cards
     const cardData = await getCards(CARD_CONFIGS.class_type);
@@ -48,7 +48,7 @@ async function getCards() {
 }
 
 // -- CARD RENDERING ALGORITHM --
-// Main callback for rendering. Updates gloabl card_config,
+// Main callback for rendering. Updates global card_config,
 // queries cards based on config, then renders resulting cards.
 async function updateCardsDisplayed(playerClass, setType){
     
@@ -65,7 +65,7 @@ async function updateCardsDisplayed(playerClass, setType){
     } else if (playerClass && CARD_CONFIGS.class_type !== playerClass) {
         // HERO CHANGED
         CARD_CONFIGS = defaultConfig(playerClass);
-        resetDeckTitle();
+        resetDeck();
         resetQuerySelectors();
         renderCards();
     } else if (setType && CARD_CONFIGS.set_type !== setType) {
@@ -136,12 +136,20 @@ function resetQuerySelectors() {
 
 
 // -- DECK FUNCTIONS --
-function resetDeckTitle() {
+function resetDeck() {
+    // Update deck title
     const deckTitleEL = document.querySelector('#deck-class h3')
     deckTitleEL.innerText = CARD_CONFIGS.class_type;
     const deckImageEl = document.querySelector('#deck-class img');
     const cardId = Hero.cardIdByName(CARD_CONFIGS.class_type);
     deckImageEl.src = `https://art.hearthstonejson.com/v1/tiles/${cardId}.png`;
+
+    // Clear deck list
+    document.querySelector('#deck-cards').innerHTML = '';
+    DECK.clear();
+
+    // Clear deck count
+    document.querySelector('#deck-count').innerText = "0/30";
 }
 
 function addCardToDeck(card){
