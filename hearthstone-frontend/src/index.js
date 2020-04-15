@@ -24,7 +24,6 @@ window.addEventListener('DOMContentLoaded', async (e) => {
     heroEls.forEach(el => heroContainerEl.appendChild(el))
     resetDeckTitle();
     
-
     // Create Cards
     const cardData = await getCards(CARD_CONFIGS.class_type);
     Card.massAssign(cardData);
@@ -178,8 +177,6 @@ function addCardToDeck(card){
             cardContainerEl.appendChild(cardInfoEl)
             cardContainerEl.appendChild(cardCountEl)
             appendCardInOrder(cardContainerEl, card.cost, card.name);
-
-            // sortCardsInDeck();
         }
 
         document.querySelector('#deck-count').innerText = `${resp.total}/30`
@@ -189,15 +186,42 @@ function addCardToDeck(card){
 function appendCardInOrder(cardEl, cardCost, cardName) {
     const deckContainerEl = document.querySelector('#deck-cards');
     const cardChildren = [...deckContainerEl.childNodes];
+
+    // Creates an array of attrs based on the cards already displayed and
+    // the new one. This is so there is a collection to sort through.
     const cardAttrs = cardChildren.map(el => {
         const card_id = el.id;
         const card_cost = el.attributes.cost.value;
         const card_name = el.attributes.name.value;
         
-        return { id: card_id,  cost: card_cost, name: card_name }
-    })
+        return { id: card_id,  cost: parseInt(card_cost), name: card_name }
+    });
+    cardAttrs.push({ id: cardEl.id, cost: cardCost, name: cardName});
 
-    console.log(cardAttrs)
+    // Sort by cost then name
+    const sortedAttrs = cardAttrs.sort(( a, b ) => {
+        if (a.cost === b.cost){
+            return (a.name < b.name) ? -1 : 1;
+        } else {
+            return (a.cost < b.cost) ? -1 : 1;
+        }
+    });
 
-    deckContainerEl.appendChild(cardEl)
+    // Determine where to place the el
+    const objFocusIndex = sortedAttrs.findIndex(el => el.id === cardEl.id);
+
+    if (sortedAttrs.length > 1) {
+        if (objFocusIndex === 0) {
+            // The el is first in line
+            deckContainerEl.prepend(cardEl)
+        } else {
+            // The el is in the middle
+            const prevId = sortedAttrs[objFocusIndex - 1].id;
+            const prevEl = document.querySelector(`#${prevId}`)
+            prevEl.parentNode.insertBefore(cardEl, prevEl.nextSibling)
+        }
+    } else {
+        // The el is the first to be added
+        deckContainerEl.appendChild(cardEl)
+    }
 }
