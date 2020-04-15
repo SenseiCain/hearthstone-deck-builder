@@ -53,3 +53,7 @@ header img {
     width: 15px;
     height: 15px;
 }
+
+.deck-card {
+    cursor: pointer;
+}

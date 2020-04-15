@@ -152,6 +152,24 @@ function resetDeck() {
     document.querySelector('#deck-count').innerText = "0/30";
 }
 
+function removeCardFromDeck() {
+    const cardEl = event.target.parentNode;
+    const cardId = cardEl.id.replace('deck_', '');
+
+    // Remove from deck & DOM
+    const resp = DECK.removeCard(cardId);
+
+    if (resp.status) {
+        if (resp.amount === 1) {
+            document.querySelector(`#${cardEl.id} .card-count`).innerText = '1';
+        } else {
+            cardEl.remove();
+        }
+
+        document.querySelector('#deck-count').innerText = `${resp.total}/30`
+    }
+}
+
 function addCardToDeck(card){
     let resp = DECK.addCard(card);
 
@@ -164,7 +182,8 @@ function addCardToDeck(card){
             cardContainerEl.id = `deck_${card.card_id}`;
             cardContainerEl.setAttribute('cost', card.cost);
             cardContainerEl.setAttribute('name', card.name)
-            cardContainerEl.classList.add('col-12', 'd-flex', 'px-0', 'border-bottom', 'border-white');
+            cardContainerEl.classList.add('col-12', 'd-flex', 'px-0', 'border-bottom', 'border-white', 'deck-card');
+            cardContainerEl.addEventListener('click', () => removeCardFromDeck())
 
             const cardManaEl = document.createElement('div');
             cardManaEl.classList.add('bg-info', 'col-1', 'p-0', 'text-center', 'text-white');
