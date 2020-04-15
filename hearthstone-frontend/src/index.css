@@ -54,6 +54,6 @@ header img {
     height: 15px;
 }
 
-.deck-card {
+.deck-card, .card-container img {
     cursor: pointer;
 }
