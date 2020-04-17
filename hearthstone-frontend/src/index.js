@@ -1,5 +1,5 @@
 const BASE_URL = 'http://localhost:3000'
-let DECK = new Deck;
+const DECK = new Deck;
 
 let CARD_CONFIGS = {
     set_type: 'Classic',
@@ -33,12 +33,15 @@ window.addEventListener('DOMContentLoaded', async (e) => {
 });
 
 
+
 // -- HERO DATA --
 async function getHeros() {
     const resp = await fetch(`${BASE_URL}/heros`)
     const json = await resp.json()
     return json
 }
+
+
 
 // -- CARD DATA --
 async function getCards() {
@@ -47,8 +50,10 @@ async function getCards() {
     return json
 }
 
+
+
 // -- CARD RENDERING ALGORITHM --
-// Main callback for rendering. Updates global card_config,
+// Main callback for rendering cards. Updates global card_config,
 // queries cards based on config, then renders resulting cards.
 async function updateCardsDisplayed(playerClass, setType){
     
@@ -71,6 +76,7 @@ async function updateCardsDisplayed(playerClass, setType){
     } else if (setType && CARD_CONFIGS.set_type !== setType) {
         // SWITCH BETWEEN NEUTRAL & CLASS CARDS
         CARD_CONFIGS = changeSetConfig(setType);
+        switchActiveSetType(eventTarget)
         renderCardsWithQuery(); 
     } else if (eventTag === 'BUTTON') {
         // RESET BUTTON
@@ -79,6 +85,8 @@ async function updateCardsDisplayed(playerClass, setType){
         renderCards();
     }
 }
+
+
 
 // -- UPDATE CONFIGS --
 function defaultConfig(playerClass) {
@@ -110,6 +118,8 @@ function updateQueryConfig(name, value) {
     return Object.assign({}, newConfigObj);
 }
 
+
+
 // -- CARD RENDERING --
 function renderCards() {
     const cardsContainerEl = document.querySelector('#cards-display');
@@ -125,7 +135,9 @@ function renderCardsWithQuery() {
     cardEls.forEach(el => cardsContainerEl.appendChild(el))
 }
 
-// -- RESET SELECT VALUES --
+
+
+// -- DOM HANDLING --
 function resetQuerySelectors() {
     document.querySelector('#search_field').value = "";
     document.querySelector('#select-rarity').value = "";
@@ -134,9 +146,25 @@ function resetQuerySelectors() {
     document.querySelector('#select-type').value = "";
 }
 
+function switchActiveSetType(node) {
+    const allSiblings = node.parentNode.childNodes;
+
+    allSiblings.forEach(el => {
+        if (el.nodeName === "DIV") {
+            el.classList.remove('active')
+        }
+    });
+
+    node.classList.add('active');
+}
+
+
 
 // -- DECK FUNCTIONS --
 function resetDeck() {
+    // Clear Deck instance
+    DECK.clear();
+    
     // Update deck title
     const deckTitleEL = document.querySelector('#deck-class h3')
     deckTitleEL.innerText = CARD_CONFIGS.class_type;
@@ -144,11 +172,8 @@ function resetDeck() {
     const cardId = Hero.cardIdByName(CARD_CONFIGS.class_type);
     deckImageEl.src = `https://art.hearthstonejson.com/v1/tiles/${cardId}.png`;
 
-    // Clear deck list
+    // Reset DOM
     document.querySelector('#deck-cards').innerHTML = '';
-    DECK.clear();
-
-    // Clear deck count
     document.querySelector('#deck-count').innerText = "0/30";
 }
 
@@ -175,9 +200,11 @@ function addCardToDeck(card){
 
     if(resp.status) {
         if (resp.amount === 1 && !resp.isLegendary) {
+            // Adding second card
             const cardCountEl = document.querySelector(`#deck_${card.card_id} .card-count`)
             cardCountEl.innerText = '2'
         } else {
+            // Initial render for adding card
             const cardContainerEl = document.createElement('div');
             cardContainerEl.id = `deck_${card.card_id}`;
             cardContainerEl.setAttribute('cost', card.cost);
@@ -197,6 +224,7 @@ function addCardToDeck(card){
             cardCountEl.classList.add('col-1', 'bg-dark', 'p-0', 'text-center', 'text-info', 'card-count');
 
             if (resp.isLegendary) {
+                // Adds a star if the card is a legendary
                 cardCountEl.innerText = "\u2605"
             }
 
@@ -214,7 +242,7 @@ function appendCardInOrder(cardEl, cardCost, cardName) {
     const deckContainerEl = document.querySelector('#deck-cards');
     const cardChildren = [...deckContainerEl.childNodes];
 
-    // Creates an array of attrs based on the cards already displayed and
+    // Models an array of attrs based on the cards already displayed and
     // the new one. This is so there is a collection to sort through.
     const cardAttrs = cardChildren.map(el => {
         const card_id = el.id;

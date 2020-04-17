@@ -14,13 +14,13 @@ header img {
 #class-select, #neutral-select {
     cursor: pointer;
 }
+ /* HERE */
+ .set-option {
+    background-color: grey;
+ }
 
 .active {
     background-color: #17a2b8!important;
-}
-
-.inactive {
-    background-color: grey;
 }
 
 #deck-container {
