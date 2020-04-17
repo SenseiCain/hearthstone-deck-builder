@@ -6,6 +6,6 @@ class CardsController < ApplicationController
             cards = Card.all
         end
 
-        render json: cards.order(:cost, :name)
+        render json: cards.order(:cost, :name), except: [:updated_at, :created_at]
     end
 end
