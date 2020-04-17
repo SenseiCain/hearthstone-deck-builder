@@ -17,6 +17,10 @@ class Card {
         ALL_CARDS.push(this)
     }
 
+    get all(){
+        return ALL_CARDS;
+    }
+
     static massAssign(objArray){
         objArray.forEach(obj => {
             new this(obj);
@@ -33,7 +37,7 @@ class Card {
             }).join(' ');
           }
 
-        // TODO - REFACTOR
+        // TODO - REFACTOR ?
         ALL_CARDS.forEach(el => {
             if (
                 ((queryObj.set_type === 'Neutral') ? el.player_class === 'Neutral' : el.player_class === queryObj.class_type)
@@ -80,9 +84,5 @@ class Card {
         divEl.appendChild(imgEl)
 
         return divEl;
-    }
-
-    get all(){
-        return ALL_CARDS;
     }
 }

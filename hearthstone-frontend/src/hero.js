@@ -12,14 +12,14 @@ class Hero {
         ALL_HEROS.push(this)
     }
 
+    get all() {
+        return ALL_HEROS
+    }
+
     static massAssign(objArray){
         objArray.forEach(obj => {
             new this(obj);
         })
-    }
-
-    get all() {
-        return ALL_HEROS
     }
 
     static cardIdByName(queryName) {

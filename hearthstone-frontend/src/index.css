@@ -1,7 +1,10 @@
+/* HEADER */
 header img {
     height: 100px;
 }
 
+
+/* MAIN CARD CONTAINER */
 #cards-display {
     max-height: 700px;
 }
@@ -14,7 +17,6 @@ header img {
 #class-select, #neutral-select {
     cursor: pointer;
 }
- /* HERE */
  .set-option {
     background-color: grey;
  }
@@ -23,6 +25,8 @@ header img {
     background-color: #17a2b8!important;
 }
 
+
+/* DECK CONATINER */
 #deck-container {
     overflow: hidden;
 }
@@ -46,12 +50,6 @@ header img {
     position: absolute;
     right: 0px;
     z-index: 1;
-}
-
-#dust-icon {
-    background: url('https://bnetcmsus-a.akamaihd.net/cms/content_folder_media/SSD3S36X3Z5J1558042454791.png');
-    width: 15px;
-    height: 15px;
 }
 
 .deck-card, .card-container img {
