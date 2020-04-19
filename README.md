@@ -2,10 +2,6 @@
 
 This is an SPA that allows users to build decks for the popular Blizzard game, Hearthstone. The application is compromised of a standalone Rails API, and a front end webpage written in Vanilla JS. The API currently serves information on Cards, and Heros included in the current rotation of the game.
 
-## Inspiration
-
-Hearthstone is a wonderful FTP game (debatable) that is easy to pick up & hard to master. When tasked with building a SPA for Flatiron School, I promptly Googled "top apis" and surprisingly discovered that Blizzard had one of the most used APIs at the time.
-
 ## Screenshot
 
 <img src="https://raw.githubusercontent.com/SenseiCain/hearthstone-deck-builder/master/screenshot.png" width=500>
