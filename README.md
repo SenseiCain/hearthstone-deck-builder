@@ -8,7 +8,7 @@ This is an SPA that allows users to build decks for the popular Blizzard game, H
 
 ## Data Sources
 
-The bulk of my data is coming from [omgvamp's API](https://rapidapi.com/omgvamp/api/hearthstone) hosted on [RapidAPI](https://rapidapi.com/), which sources information directly from [Blizzard](https://develop.battle.net/documentation/hearthstone/game-data-apis). By using this API instead of Blizzard's, I was able to circumvent client-side authorization.
+The bulk of the data is coming from [omgvamp's API](https://rapidapi.com/omgvamp/api/hearthstone) hosted on [RapidAPI](https://rapidapi.com/), which sources information directly from [Blizzard](https://develop.battle.net/documentation/hearthstone/game-data-apis). By using this API instead of Blizzard's, I was able to circumvent client-side authorization.
 
 Images are being sourced from [HearthstoneJSON](https://hearthstonejson.com/).
 
