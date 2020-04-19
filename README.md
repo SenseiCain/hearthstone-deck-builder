@@ -53,4 +53,5 @@ UI more in theme with Blizzard.
 # Credits
 
 Data - https://rapidapi.com/omgvamp/api/hearthstone
+
 Images - https://hearthstonejson.com/
