@@ -1,26 +1,60 @@
-# README
+# Hearthstone Deck builder
 
-TODO
+This is an SPA that allows users to build decks for the popular Blizzard game, Hearthstone. The application is compromised of a standalone Rails API, and a front end webpage written in Vanilla JS. The API currently serves information on Cards, and Heros included in the current rotation of the game.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Inspiration
 
-Things you may want to cover:
+Hearthstone is a wonderful FTP game (debatable) that is easy to pick up & hard to master. When tasked with building a SPA for Flatiron School, I promptly Googled "top apis" and surprisingly discovered that Blizzard had one of the most used APIs at the time.
 
-* Ruby version
+## Screenshot
 
-* System dependencies
+<img src="https://raw.githubusercontent.com/senseicain/hearthstone-deck-builder/screenshot.png" width=500>
 
-* Configuration
+## Data Sources
 
-* Database creation
+The bulk of my data is coming from [omgvamp's API](https://rapidapi.com/omgvamp/api/hearthstone) hosted on [RapidAPI](https://rapidapi.com/), which sources information directly from [Blizzard](https://develop.battle.net/documentation/hearthstone/game-data-apis). By using this API instead of Blizzard's, I was able to circumvent client-side authorization.
 
-* Database initialization
+Images are being sourced from [HearthstoneJSON](https://hearthstonejson.com/).
 
-* How to run the test suite
+## Getting Started
 
-* Services (job queues, cache servers, search engines, etc.)
+Currently the application is only available to run locally.
 
-* Deployment instructions
+One thing to first note; since the file is structured in a way that allows the Rails backend to act as a standalone API, the root directory for the API should be `./hearthstone-backend`. No commands are needed to be ran from the frontend directory, other than opening `index.html`.
 
-* ...
+First Fork & Clone this repo, then run the following commands in order from `./hearthstone-backend`.
+```
+bundle install
+rails db:migrate
+rails rapidapi:json
+rails db:seed
+```
+The command `rails rapidapi:json` is a custom Rake task that sends a request to RapidAPI, filters through the JSON response, then creates a new JSON file locally that is then used to seed the DB.
+
+Once configured, then you can start your server with `rails s`. Navigate to the `index.html` file in your browser, and you should be up & running!
+
+## Endpoints - Heros
+
+|   Name    |           Path            | HTTP Verb |                     Purpose                     |
+| :-------: | :-----------------------: | :-------: | :---------------------------------------------: |
+|   Index   |        /heros/            |    GET    |               Displays all heros                |
+|   Show    |        /heros/:id         |    GET    |              Displays single hero               |
+
+## Endpoints - Cards
+
+|   Name    |           Path            | HTTP Verb |                     Purpose                     |
+| :-------: | :-----------------------: | :-------: | :---------------------------------------------: |
+|   Index   |        /cards/            |    GET    |               Displays all cards                |
+
+## Future Goals
+
+Deploy to Heroku.
+More endpoints.
+Ablity to save decks.
+Carousel of images for Hero selection.
+UI more in theme with Blizzard.
+
+# Credits
+
+Data - https://rapidapi.com/omgvamp/api/hearthstone
+Images - https://hearthstonejson.com/
