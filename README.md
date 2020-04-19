@@ -1,4 +1,4 @@
-# Hearthstone Deck builder
+# Hearthstone Deck Builder
 
 This is an SPA that allows users to build decks for the popular Blizzard game, Hearthstone. The application is compromised of a standalone Rails API, and a front end webpage written in Vanilla JS. The API currently serves information on Cards, and Heros included in the current rotation of the game.
 
