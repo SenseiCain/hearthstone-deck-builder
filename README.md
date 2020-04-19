@@ -8,7 +8,7 @@ Hearthstone is a wonderful FTP game (debatable) that is easy to pick up & hard t
 
 ## Screenshot
 
-<img src="https://raw.githubusercontent.com/senseicain/hearthstone-deck-builder/screenshot.png" width=500>
+<img src="https://raw.githubusercontent.com/SenseiCain/hearthstone-deck-builder/master/screenshot.png" width=500>
 
 ## Data Sources
 
