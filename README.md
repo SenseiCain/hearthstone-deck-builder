@@ -2,7 +2,7 @@
 
 This is an SPA that allows users to build decks for the popular Blizzard game, Hearthstone. The application is compromised of a standalone Rails API, and a front end webpage written in Vanilla JS. The API currently serves information on Cards, and Heros included in the current rotation of the game.
 
-Blog - https://medium.com/@christian24cain/javascript-with-rails-api-project-70948254a8de
+Blog post - https://medium.com/@christian24cain/javascript-with-rails-api-project-70948254a8de
 
 ## Screenshot
 
