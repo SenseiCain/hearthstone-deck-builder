@@ -241,6 +241,7 @@ function addCardToDeck(card){
             const saveBtnEl = document.createElement('button');
             saveBtnEl.id = "deck-save"
             saveBtnEl.innerText = 'Save';
+            saveBtnEl.classList.add('btn', 'btn-block', 'btn-group', 'btn-info', 'p-1', 'd-flex', 'justify-content-center', 'mt-1')
             saveBtnEl.addEventListener('click', sendDeck);
 
             deckContainerEl.appendChild(saveBtnEl);
