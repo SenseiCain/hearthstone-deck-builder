@@ -5,7 +5,7 @@ class Deck {
 
     }
 
-    get cards() {
+    cards() {
         return DECK_CARDS;
     }
 

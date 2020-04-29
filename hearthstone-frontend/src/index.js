@@ -191,6 +191,7 @@ function removeCardFromDeck() {
             cardEl.remove();
         }
 
+        document.querySelector('#deck-save').remove();
         document.querySelector('#deck-count').innerText = `${resp.total}/30`
     }
 }
@@ -234,6 +235,18 @@ function addCardToDeck(card){
             appendCardInOrder(cardContainerEl, card.cost, card.name);
         }
 
+        // Show save button if 30 cards
+        if (resp.total === 30) {
+            const deckContainerEl = document.querySelector('#deck-container');
+            const saveBtnEl = document.createElement('button');
+            saveBtnEl.id = "deck-save"
+            saveBtnEl.innerText = 'Save';
+            saveBtnEl.addEventListener('click', sendDeck);
+
+            deckContainerEl.appendChild(saveBtnEl);
+        }
+
+        // Update count
         document.querySelector('#deck-count').innerText = `${resp.total}/30`
     }
 }
@@ -279,4 +292,13 @@ function appendCardInOrder(cardEl, cardCost, cardName) {
         // The el is the first to be added
         deckContainerEl.appendChild(cardEl)
     }
+}
+
+// -- SEND DECK --
+function sendDeck() {
+    const cards = DECK.cards();
+    const jsonData = JSON.stringify(cards);
+
+    
+    console.log(jsonData)
 }
