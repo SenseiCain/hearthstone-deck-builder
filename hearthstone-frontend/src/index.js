@@ -295,10 +295,17 @@ function appendCardInOrder(cardEl, cardCost, cardName) {
 }
 
 // -- SEND DECK --
-function sendDeck() {
+async function sendDeck() {
     const cards = DECK.cards();
-    const jsonData = JSON.stringify(cards);
+    const cardsJson = JSON.stringify(cards);
 
-    
-    console.log(jsonData)
+    const resp = await fetch(`${BASE_URL}/decks`, 
+    {
+        headers: {},
+        method: "POST",
+        body: cardsJson
+    });
+    const json = await resp.json();
+
+    console.log(json)
 }
