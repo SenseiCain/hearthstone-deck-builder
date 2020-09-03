@@ -55,7 +55,7 @@ async function getCards() {
 // -- CARD RENDERING ALGORITHM --
 // Main callback for rendering cards. Updates global card_config,
 // queries cards based on config, then renders resulting cards.
-async function updateCardsDisplayed(playerClass, setType){
+function updateCardsDisplayed(playerClass, setType){
     
     // EVENT THAT TRIGGERED FN
     const eventTarget = event.target;
