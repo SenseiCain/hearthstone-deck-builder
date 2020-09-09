@@ -7,7 +7,7 @@ class CreateCards < ActiveRecord::Migration[6.0]
       t.string :card_set
       t.string :type
       t.string :rarity
-      t.string :cost
+      t.integer :cost
       t.string :player_class
       t.string :img
       t.string :mechanics
