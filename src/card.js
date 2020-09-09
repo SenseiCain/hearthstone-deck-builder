@@ -74,7 +74,7 @@ class Card {
 
     static render(obj) {
         const divEl = document.createElement('div')
-        divEl.classList.add('col-xs-12', 'col-sm-6', 'col-md-4', 'col-lg-3', 'card-container')
+        divEl.classList.add('col-6', 'col-md-4', 'col-lg-3', 'card-container')
         divEl.addEventListener('click', () => {
             addCardToDeck(obj);
         })
