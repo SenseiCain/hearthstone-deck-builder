@@ -15,6 +15,6 @@ test:
 
 production:
   <<: *default
-  database: hearthstone-api-cc-production
+  url: <%= ENV['DATABASE_URL'] %>
   username: hearthstone-api-cc
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
