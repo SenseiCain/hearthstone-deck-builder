@@ -7,7 +7,7 @@ default: &default
 
 development:
   <<: *default
-  database: hearthstone-api-cc_development
+  database: hearthstone-api-cc-dev
 
 test:
   <<: *default
@@ -15,6 +15,6 @@ test:
 
 production:
   <<: *default
-  database: hearthstone-api-cc_production
+  database: hearthstone-api-cc-production
   username: hearthstone-api-cc
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
