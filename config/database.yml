@@ -1,25 +1,20 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: localhost
-  port: 5432
   # For details on connection pooling, see Rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
 
 development:
   <<: *default
-  database: hearthstone_dev
+  database: hearthstone-api-cc_development
 
 test:
   <<: *default
-  database: hearthstone-cc-api_test
-
-staging:
-  <<: *default
-  database: hearthstone-cc-api
+  database: hearthstone-api-cc
 
 production:
   <<: *default
-  database: hearthstone-cc-api
+  database: hearthstone-api-cc_production
+  username: hearthstone-api-cc
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
