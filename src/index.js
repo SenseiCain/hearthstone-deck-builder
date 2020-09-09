@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'https://hearthstone-api-cc.herokuapp.com/'
 const DECK = new Deck;
 
 let CARD_CONFIGS = {

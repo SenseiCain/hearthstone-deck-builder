@@ -1,2 +1,0 @@
-class Hero < ApplicationRecord
-end

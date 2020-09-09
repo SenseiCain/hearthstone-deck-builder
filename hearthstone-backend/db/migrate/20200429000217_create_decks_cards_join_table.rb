@@ -1,5 +1,0 @@
-class CreateDecksCardsJoinTable < ActiveRecord::Migration[6.0]
-  def change
-    create_join_table :decks, :cards
-  end
-end
